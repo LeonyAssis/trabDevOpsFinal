@@ -1,15 +1,12 @@
 name: Main
 on:
   push:
-    branches:
-      - main
-
+    branches: [ main ]
   workflow_dispatch:
 jobs:
-
   build:
     runs-on: ubuntu-latest
-   
+
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
@@ -20,35 +17,9 @@ jobs:
         run: npm install
       - name: Run test
         run: npm test
-
-      - uses: actions/checkout@v1
-
-  publish:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: bubkoo/release-github-action@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
-
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}   
-          fetch-depth: 0               
-
-      - name: Git Version
-        uses: codacy/git-version@2.5.4
+      
+      - name: Release
+        uses: softprops/action-gh-release@v1
 
   deploy:
     runs-on: ubuntu-latest

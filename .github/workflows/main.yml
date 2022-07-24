@@ -11,6 +11,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: eslint
+        uses: actions/setup-node@v1
+        with: 
+            node-version: "14.x"
+      - name: yarn install
+        run: yarn install
+      - name: eslint
+        uses: icrawl/action-eslint@v1
+              
       - name: Use Node.js
         uses: actions/setup-node@v2
         with: 
@@ -21,7 +30,9 @@ jobs:
         run: npm test
       
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v1 
+   
+     
 
   deploy:
     runs-on: ubuntu-latest

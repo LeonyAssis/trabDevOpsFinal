@@ -1,10 +1,12 @@
 name: Main
 on:
-  push:    
+  push:
     tags:
-      - '*'
+    - '*'
+    
   workflow_dispatch:
 jobs:
+
   build:
     runs-on: ubuntu-latest
     permissions:
@@ -19,7 +21,8 @@ jobs:
         run: npm install
       - name: Run test
         run: npm test
-      - uses: actions/checkout@v2
+
+      - uses: actions/checkout@v1
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "release.tar.gz,foo/*.txt"

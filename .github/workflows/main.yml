@@ -28,6 +28,8 @@ jobs:
         run: npm install
       - name: Run test
         run: npm test
+      - name: Audit packages
+        run: npm audit
       
       - name: Release
         uses: softprops/action-gh-release@v1 
